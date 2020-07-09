@@ -1,7 +1,7 @@
 # build stage
-FROM alpine:3.9 AS builder
+FROM alpine:latest AS builder
 
-ENV KUBECTL_VERSION=v1.14.3
+ENV KUBECTL_VERSION=v1.17.8
 
 RUN set -ex && \
     apk add --no-cache curl && \
@@ -9,8 +9,10 @@ RUN set -ex && \
     chmod +x ./kubectl
 
 # final stage
-FROM alpine:3.9
+FROM alpine:latest
 
 WORKDIR /usr/local/bin
 
 COPY --from=builder /kubectl .
+
+ENTRYPOINT ["kubectl"]
