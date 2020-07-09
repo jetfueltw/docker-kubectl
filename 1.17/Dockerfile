@@ -14,5 +14,3 @@ FROM alpine:latest
 WORKDIR /usr/local/bin
 
 COPY --from=builder /kubectl .
-
-ENTRYPOINT ["kubectl"]
